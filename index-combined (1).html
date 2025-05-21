@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="google-site-verification" content="0FulXg0DNFIp7n7lvbMqL_i2tDdWISGwkBUzrpMY1LA" />
+  <title>FitFlow Gym - Your Fitness Journey Starts Here</title>
+  <meta name="description" content="Track your progress, discover personalized workouts, and achieve your fitness goals with our AI-powered platform." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Open Graph tags for better social sharing -->
+  <meta property="og:title" content="FitFlow Gym - Your Fitness Journey Starts Here" />
+  <meta property="og:description" content="Track your progress, discover personalized workouts, and achieve your fitness goals with our AI-powered platform." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
+  <style>
+    /* Base styles */
+    :root {
+      --primary-color: #0e153a;
+      --secondary-color: #3d5af1;
+      --accent-color: #22d1ee;
+      --light-color: #e2f3f5;
+      --dark-color: #0e153a;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --text-color: #333;
+      --text-light: #666;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: #f9f9f9;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* Layout */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--box-shadow);
+    }
+
+    header h1 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.5rem;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    header nav a {
+      color: white;
+      font-weight: 500;
+    }
+
+    header nav a:hover {
+      color: var(--accent-color);
+    }
+
+    section {
+      padding: 4rem 2rem;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section > p {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* Components */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .primary {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .primary:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .secondary {
+      background-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    .secondary:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    .tag.small {
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+    }
+
+    .tag.gym {
+      background-color: #ffecb3;
+      color: #e65100;
+    }
+
+    .tag.home {
+      background-color: #e1f5fe;
+      color: #0277bd;
+    }
+
+    .tag.core {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .tag.male {
+      background-color: #bbdefb;
+      color: #1565c0;
+    }
+
+    .tag.female {
+      background-color: #f8bbd0;
+      color: #c2185b;
+    }
+
+    .tag.both {
+      background-color: #e1bee7;
+      color: #7b1fa2;
+    }
+
+    .tag.upper {
+      background-color: #ffccbc;
+      color: #bf360c;
+    }
+
+    .tag.lower {
+      background-color: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .text-link i {
+      transition: transform 0.3s ease;
+    }
+
+    .text-link:hover i {
+      transform: translateX(4px);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(14, 21, 58, 0.8), rgba(14, 21, 58, 0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080') no-repeat center center/cover;
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Category Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .category-card h3 {
+      margin: 1rem 1rem 0.5rem;
+    }
+
+    .category-card p {
+      margin: 0 1rem 1rem;
+      color: var(--text-light);
+    }
+
+    .category-card a {
+      margin: 0 1rem 1rem;
+      display: inline-block;
+    }
+
+    /* Filter Buttons and Search */
+    .filter-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-container input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    .tag-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag-filter {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .tag-filter:hover, .tag-filter.active {
+      background-color: var(--light-color);
+      border-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    /* Exercise Grid */
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .exercise-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exercise-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exercise-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .exercise-card:hover .exercise-image img {
+      transform: scale(1.05);
+    }
+
+    .exercise-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exercise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-header h3 {
+      margin-bottom: 0;
+      font-size: 1.2rem;
+    }
+
+    .exercise-content p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .exercise-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .exercise-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .play-btn {
+      color: var(--secondary-color);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+    }
+
+    .play-btn:hover {
+      color: var(--primary-color);
+      background-color: var(--light-color);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .pagination button {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    .pagination button:hover, .pagination button.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Stats Section */
+    #stats {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+    }
+
+    #stats h2 {
+      color: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-card .number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .stat-card .label {
+      font-size: 1.2rem;
+    }
+
+    /* Calculator Section */
+    .calculator-container {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .calculator-tabs {
+      display: flex;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .calculator-tab {
+      padding: 1rem;
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .calculator-tab.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-bottom: 3px solid var(--accent-color);
+    }
+
+    .calculator-content {
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .input-group {
+      display: flex;
+    }
+
+    .input-group input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .input-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-left: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-family: inherit;
+      font-size: 1rem;
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-container {
+      margin-top: 2rem;
+      background-color: var(--light-color);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .result-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 8px solid var(--secondary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 1rem;
+      background-color: white;
+    }
+
+    .result-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .result-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .result-category {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--success-color);
+      margin-bottom: 1rem;
+    }
+
+    .category-list {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+
+    .category-item.active {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+
+    /* Testimonials Section */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+    }
+
+    .testimonial-title {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(rgba(14, 21, 58, 0.9), rgba(14, 21, 58, 0.95)), url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .feature-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .feature-description {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Footer */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-newsletter p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+    }
+
+    .newsletter-form input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-family: inherit;
+    }
+
+    .newsletter-form button {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      border: none;
+      padding: 0 1rem;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    /* Auth Modal */
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-container.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-container.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-tabs {
+      display: flex;
+    }
+
+    .modal-tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      background-color: #f5f5f5;
+    }
+
+    .modal-tab.active {
+      background-color: white;
+      border-bottom: 3px solid var(--secondary-color);
+    }
+
+    .modal-content {
+      padding: 2rem;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.5rem 0;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .success-container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .success-icon {
+      display: inline-flex;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(76, 175, 80, 0.1);
+      color: var(--success-color);
+      font-size: 2rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-message {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Dashboard */
+    .dashboard-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .dashboard-tabs {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .dashboard-tab {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    .dashboard-tab.active {
+      color: white;
+      border-bottom: 2px solid var(--accent-color);
+    }
+
+    .dashboard-user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .dashboard-container {
+      padding: 2rem;
+    }
+
+    .welcome-section {
+      margin-bottom: 2rem;
+    }
+
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card-light {
+      background-color: var(--light-color);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+    }
+
+    .stat-card-light .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card-light .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e5e5;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .progress-bar .progress {
+      height: 100%;
+      background-color: var(--secondary-color);
+      border-radius: 4px;
+    }
+
+    .chart-container {
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .upcoming-workouts {
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+    }
+
+    .workout-list {
+      margin-top: 1rem;
+    }
+
+    .workout-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(226, 243, 245, 0.5);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .workout-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .workout-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--border-radius);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+    }
+
+    .workout-icon.strength {
+      background-color: rgba(61, 90, 241, 0.1);
+      color: var(--secondary-color);
+    }
+
+    .workout-icon.cardio {
+      background-color: rgba(34, 209, 238, 0.1);
+      color: var(--accent-color);
+    }
+
+    .workout-icon.recovery {
+      background-color: rgba(14, 21, 58, 0.1);
+      color: var(--primary-color);
+    }
+
+    .workout-details h4 {
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+
+    .workout-details p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .workout-start {
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .workout-start:hover {
+      color: var(--primary-color);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .stat-card .number {
+        font-size: 2rem;
+      }
+
+      .modal {
+        width: 90%;
+      }
+
+      .dashboard-tabs {
+        display: none;
+      }
+
+      .stats-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding: 4rem 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .stats-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FitFlow</h1>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#exercises">Exercises</a>
+      <a href="#plans">Plans</a>
+      <a href="#calculators">Calculators</a>
+      <a href="#" class="btn primary" id="loginBtn">Log In</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h2>Transform Your Fitness Journey</h2>
+        <p>Track your progress, discover personalized workouts, and achieve your fitness goals with our AI-powered platform.</p>
+        
+        <div class="hero-buttons">
+          <button class="btn primary" id="signupBtn">Start Your Journey</button>
+          <a href="#exercises" class="btn secondary">Explore Exercises <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="stats-grid" style="margin-top: 3rem;">
+          <div class="stat-card">
+            <div class="number">100+</div>
+            <div class="label">Exercises</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">50K+</div>
+            <div class="label">Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">30+</div>
+            <div class="label">Workout Plans</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">4.8</div>
+            <div class="label">User Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section id="dashboard-preview">
+      <h2>Your Personal Fitness Dashboard</h2>
+      <p>Track your progress, manage your workouts, and stay motivated with our comprehensive dashboard designed to help you reach your fitness goals.</p>
+      
+      <div class="dashboard-container" style="max-width: 1000px; margin: 0 auto; background-color: #f5f5f5; border-radius: var(--border-radius); padding: 1rem; box-shadow: var(--box-shadow);">
+        <div style="background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          <!-- Dashboard Nav -->
+          <div class="dashboard-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div class="dashboard-title">FitFlow Dashboard</div>
+              <div class="dashboard-tabs">
+                <div class="dashboard-tab active">Overview</div>
+                <div class="dashboard-tab">Workouts</div>
+                <div class="dashboard-tab">Progress</div>
+                <div class="dashboard-tab">Nutrition</div>
+              </div>
+            </div>
+            <div class="dashboard-user">
+              <i class="fas fa-bell" style="color: rgba(255, 255, 255, 0.7);"></i>
+              <div class="user-avatar">JD</div>
+            </div>
+          </div>
+          
+          <!-- Dashboard Content -->
+          <div class="dashboard-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+              <h3>Welcome back, John!</h3>
+              <p style="color: var(--text-light);">You're making great progress. Keep it up!</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+              <div class="stat-card-light">
+                <div class="stat-label">Weekly Workouts</div>
+                <div class="stat-value">4 / 5</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Calories Burned</div>
+                <div class="stat-value">1,240</div>
+                <div style="color: var(--success-color); font-size: 0.8rem; display: flex; align-items: center; margin-top: 0.5rem;">
+                  <i class="fas fa-arrow-up" style="margin-right: 0.3rem;"></i> 15% from last week
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Active Minutes</div>
+                <div class="stat-value">346</div>
+                <div style="color: var(--success-color); font-size: 0.8rem; display: flex; align-items: center; margin-top: 0.5rem;">
+                  <i class="fas fa-arrow-up" style="margin-right: 0.3rem;"></i> 8% from last week
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Workout Streak</div>
+                <div class="stat-value">12 days</div>
+                <div style="display: flex; gap: 0.25rem; margin-top: 0.5rem;">
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #e5e5e5;"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #e5e5e5;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Progress Summary Box (replacing chart) -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4 style="margin-bottom: 0;">Your Fitness Progress</h4>
+              </div>
+              <div style="padding: 2rem; text-align: center;">
+                <div style="margin-bottom: 1.5rem;">
+                  <div style="font-size: 1.4rem; font-weight: 600; color: var(--primary-color);">Great progress this month!</div>
+                  <p style="color: var(--text-light);">You're consistently improving - keep up the good work!</p>
+                </div>
+                <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 1rem;">
+                  <div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--secondary-color);">-5kg</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">Weight Loss</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent-color);">+15%</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">Strength Gain</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--success-color);">92%</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">Goal Completion</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Upcoming Workouts -->
+            <div class="upcoming-workouts">
+              <h4>Upcoming Workouts</h4>
+              <div class="workout-list">
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon strength">
+                      <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>Upper Body Strength</h4>
+                      <p>Today • 5:30 PM • 45 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+                
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon cardio">
+                      <i class="fas fa-running"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>HIIT Cardio</h4>
+                      <p>Tomorrow • 6:00 AM • 30 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+                
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon recovery">
+                      <i class="fas fa-yoga"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>Recovery Yoga</h4>
+                      <p>Wed, May 15 • 7:00 PM • 60 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exercises Section -->
+    <section id="exercises" class="bg-light">
+      <h2>Exercise Library</h2>
+      <p>Browse through our extensive collection of exercises, complete with AI-generated tutorials, form guides, and workout integration.</p>
+      
+      <div class="filter-container">
+        <div class="search-container">
+          <input type="text" placeholder="Search exercises..." id="exerciseSearch">
+          <button class="btn primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="strength">Strength</button>
+          <button class="filter-btn" data-category="cardio">Cardio</button>
+          <button class="filter-btn" data-category="flexibility">Flexibility</button>
+          <button class="filter-btn" data-category="core">Core</button>
+        </div>
+        
+        <div class="tag-filters">
+          <button class="tag-filter" data-tag="gym">Gym</button>
+          <button class="tag-filter" data-tag="home">Home</button>
+          <button class="tag-filter" data-tag="upper">Upper Body</button>
+          <button class="tag-filter" data-tag="lower">Lower Body</button>
+          <button class="tag-filter" data-tag="core">Core</button>
+          <button class="tag-filter" data-tag="beginner">Beginner</button>
+          <button class="tag-filter" data-tag="intermediate">Intermediate</button>
+          <button class="tag-filter" data-tag="advanced">Advanced</button>
+        </div>
+      </div>
+      
+      <div class="exercises-grid">
+        <!-- Exercise Card 1 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym upper intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Bench Press">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Bench Press</h3>
+            </div>
+            <p>A compound exercise that targets the chest, shoulders, and triceps. Perfect for building upper body strength.</p>
+            <div class="exercise-tags">
+              <span class="tag small upper">Chest</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=rT7DgCr-3pg" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 2 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym lower intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Barbell Squat">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Barbell Squat</h3>
+            </div>
+            <p>The king of leg exercises. Builds strength and size in your quadriceps, hamstrings, and glutes.</p>
+            <div class="exercise-tags">
+              <span class="tag small lower">Legs</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=ultWZbUMPL8" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 3 -->
+        <div class="exercise-card" data-category="core" data-tags="home core beginner">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1566241440091-ec10de8db2e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Plank">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Core</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Plank</h3>
+            </div>
+            <p>An isometric core exercise that strengthens your abdominals, lower back, and shoulders.</p>
+            <div class="exercise-tags">
+              <span class="tag small core">Core</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Beginner</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=pSHjTRCQxIw" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 4 -->
+        <div class="exercise-card" data-category="strength" data-tags="home upper beginner">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1616803689943-5601631c7fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Push-Up">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Push-Up</h3>
+            </div>
+            <p>A classic bodyweight exercise that works your chest, triceps, and shoulders while engaging your core.</p>
+            <div class="exercise-tags">
+              <span class="tag small upper">Chest</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Beginner</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=IODxDxX7oi4" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 5 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym lower advanced">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Deadlift">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Deadlift</h3>
+            </div>
+            <p>A compound movement that targets your entire posterior chain, including your back, glutes, and hamstrings.</p>
+            <div class="exercise-tags">
+              <span class="tag small lower">Back</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Advanced</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=ytGaGIn3SjE" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 6 -->
+        <div class="exercise-card" data-category="cardio" data-tags="home core intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Burpees">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Cardio</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Burpees</h3>
+            </div>
+            <p>A full-body exercise that combines a push-up, squat, and jump for maximum cardio and strength benefits.</p>
+            <div class="exercise-tags">
+              <span class="tag small core">Full Body</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=dZgVxmf6jkA" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button class="btn secondary" id="loadMoreExercises">
+          Load More Exercises <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Workout Plans Section -->
+    <section id="plans">
+      <h2>Workout Plans</h2>
+      <p>Find the perfect workout plan tailored to your fitness level, goals, and available equipment. From beginners to advanced athletes, we have something for everyone.</p>
+      
+      <div class="category-grid">
+        <!-- Plan Card 1 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1579126038374-6064e9370f0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Fitness Foundations">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">BEGINNER</div>
+          <div style="padding: 1.5rem;">
+            <h3>Fitness Foundations</h3>
+            <p>Perfect for beginners looking to build a solid fitness foundation with basic exercises and proper form.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>3 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>30-45 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Minimal equipment needed</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Form guidance and tutorials</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn">Start This Plan</button>
+          </div>
+        </div>
+        
+        <!-- Plan Card 2 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Strength & Conditioning">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">INTERMEDIATE</div>
+          <div class="tag" style="position: absolute; top: 1rem; right: 1rem; background-color: var(--secondary-color); color: white;">POPULAR</div>
+          <div style="padding: 1.5rem;">
+            <h3>Strength & Conditioning</h3>
+            <p>Challenge yourself with progressive overload and varied workouts to build muscle and improve conditioning.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>4-5 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>45-60 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Mix of gym and home workouts</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Progressive overload tracking</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn2">Start This Plan</button>
+          </div>
+        </div>
+        
+        <!-- Plan Card 3 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Elite Performance">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">ADVANCED</div>
+          <div style="padding: 1.5rem;">
+            <h3>Elite Performance</h3>
+            <p>Intensive training program designed for experienced athletes looking to maximize strength and performance.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>5-6 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>60-90 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Periodization and split routines</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Advanced recovery techniques</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn3">Start This Plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators" class="bg-light">
+      <h2>Fitness Calculators</h2>
+      <p>Use our scientifically-backed calculators to track your fitness metrics, set realistic goals, and monitor your progress over time.</p>
+      
+      <div class="calculator-container">
+        <div class="calculator-tabs">
+          <div class="calculator-tab active" data-tab="bmi">
+            <i class="fas fa-weight"></i> BMI Calculator
+          </div>
+          <div class="calculator-tab" data-tab="tdee">
+            <i class="fas fa-fire-alt"></i> TDEE Calculator
+          </div>
+          <div class="calculator-tab" data-tab="1rm">
+            <i class="fas fa-dumbbell"></i> 1RM Calculator
+          </div>
+          <div class="calculator-tab" data-tab="bodyfat">
+            <i class="fas fa-percentage"></i> Body Fat
+          </div>
+        </div>
+        
+        <div class="calculator-content">
+          <!-- BMI Calculator -->
+          <div class="calculator-pane active" id="bmi-calculator">
+            <h3>BMI (Body Mass Index) Calculator</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+              <div>
+                <div class="form-group">
+                  <label for="height">Height</label>
+                  <div class="input-group">
+                    <input type="number" id="height" value="175" min="50" max="250">
+                    <select id="height-unit">
+                      <option value="cm">cm</option>
+                      <option value="in">in</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="weight">Weight</label>
+                  <div class="input-group">
+                    <input type="number" id="weight" value="70" min="20" max="300">
+                    <select id="weight-unit">
+                      <option value="kg">kg</option>
+                      <option value="lb">lb</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input type="number" id="age" value="30" min="18" max="100" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+                </div>
+                
+                <div class="form-group">
+                  <label>Gender</label>
+                  <div class="radio-group">
+                    <div class="radio-item">
+                      <input type="radio" id="male" name="gender" value="male" checked>
+                      <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                      <input type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="btn primary" style="width: 100%;" id="calculate-bmi">Calculate BMI</button>
+              </div>
+              
+              <div class="result-container">
+                <h4>Your Results</h4>
+                
+                <div class="result-circle">
+                  <div class="result-number" id="bmi-result">--</div>
+                  <div class="result-label">BMI</div>
+                </div>
+                
+                <div class="result-category" id="bmi-category">Calculate to see results</div>
+                
+                <div class="category-list">
+                  <h5>BMI Categories</h5>
+                  <div class="category-item" id="underweight">
+                    <span>Underweight</span>
+                    <span>Below 18.5</span>
+                  </div>
+                  <div class="category-item" id="normal">
+                    <span>Normal weight</span>
+                    <span>18.5 - 24.9</span>
+                  </div>
+                  <div class="category-item" id="overweight">
+                    <span>Overweight</span>
+                    <span>25 - 29.9</span>
+                  </div>
+                  <div class="category-item" id="obese">
+                    <span>Obesity</span>
+                    <span>30 or greater</span>
+                  </div>
+                </div>
+                
+                <div style="font-size: 0.8rem; color: var(--text-light); font-style: italic;">
+                  Note: BMI is a general indicator and doesn't account for muscle mass, body composition, or other individual factors.
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- TDEE Calculator -->
+          <div class="calculator-pane" id="tdee-calculator">
+            <h3>TDEE (Total Daily Energy Expenditure) Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+          
+          <!-- 1RM Calculator -->
+          <div class="calculator-pane" id="1rm-calculator">
+            <h3>1RM (One Rep Max) Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+          
+          <!-- Body Fat Calculator -->
+          <div class="calculator-pane" id="bodyfat-calculator">
+            <h3>Body Fat Percentage Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <h2>Success Stories</h2>
+      <p>Hear from our community about how FitFlow has transformed their fitness journeys.</p>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "FitFlow has completely changed my approach to fitness. The personalized workout plans and progress tracking have helped me lose 30 pounds and gain muscle definition I never thought I'd have!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Sarah Johnson">
+            <div>
+              <div class="testimonial-name">Sarah Johnson</div>
+              <div class="testimonial-title">FitFlow Member - 8 months</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "As a busy professional, I never found time for consistent workouts. The FitFlow app's reminders, short workout options, and exercise tutorials made it easy to stay committed even with my hectic schedule."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="David Chen">
+            <div>
+              <div class="testimonial-name">David Chen</div>
+              <div class="testimonial-title">FitFlow Member - 1 year</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "The workout plans are fantastic, but what really sets FitFlow apart is the supportive community. I've connected with others who share my fitness goals, and we motivate each other every day!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Emily Rodriguez">
+            <div>
+              <div class="testimonial-name">Emily Rodriguez</div>
+              <div class="testimonial-title">FitFlow Member - 6 months</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta">
+      <h2>Why Choose FitFlow?</h2>
+      <p>Our platform offers everything you need to transform your fitness journey and achieve long-lasting results.</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="feature-title">Progress Tracking</div>
+          <div class="feature-description">Track your workouts, measurements, and fitness achievements with detailed analytics.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <div class="feature-title">Personalized Plans</div>
+          <div class="feature-description">Get workout and nutrition plans tailored to your fitness level, goals, and preferences.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="feature-title">Video Tutorials</div>
+          <div class="feature-description">Learn proper form with our library of HD video tutorials for every exercise.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="feature-title">Community Support</div>
+          <div class="feature-description">Connect with like-minded fitness enthusiasts and share your journey.</div>
+        </div>
+      </div>
+      
+      <div style="text-align: center;">
+        <button class="btn primary" id="ctaSignupBtn">Start Your Fitness Journey Today</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">FitFlow</div>
+        <p>Your all-in-one fitness platform for personalized workouts, progress tracking, and expert guidance.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#exercises">Exercises</a></li>
+          <li><a href="#plans">Workout Plans</a></li>
+          <li><a href="#calculators">Calculators</a></li>
+          <li><a href="#" id="footerLoginBtn">Dashboard</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Subscribe</h3>
+        <p>Stay updated with the latest fitness tips and features.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-copyright">
+      <p>© 2025 FitFlow. All rights reserved. Designed with ❤️ for fitness enthusiasts.</p>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-container" id="authModal">
+    <div class="modal">
+      <div class="modal-tabs">
+        <div class="modal-tab active" data-tab="login">Log In</div>
+        <div class="modal-tab" data-tab="signup">Sign Up</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="modal-content active" id="login-content">
+        <h3 class="modal-title">Welcome Back</h3>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="your@email.com" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-footer">
+            <div class="remember-me">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me">Remember me</label>
+            </div>
+            <a href="#" style="font-size: 0.9rem;">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="btn primary" style="width: 100%;">Log In</button>
+        </form>
+      </div>
+      
+      <!-- Signup Form -->
+      <div class="modal-content" id="signup-content">
+        <h3 class="modal-title">Create Your Account</h3>
+        
+        <form id="signup-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" placeholder="John" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+            </div>
+            
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" placeholder="Doe" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="your@email.com" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <button type="submit" class="btn primary" style="width: 100%;">Create Account</button>
+        </form>
+      </div>
+      
+      <!-- Success Message -->
+      <div class="success-container hidden" id="success-message">
+        <div class="success-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h3 class="success-title">Account Created!</h3>
+        <p class="success-message">Your account has been created successfully. You can now access your personalized dashboard.</p>
+        <button class="btn primary" id="success-continue">Continue to Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Filter exercise cards
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const tagFilters = document.querySelectorAll('.tag-filter');
+      const exerciseCards = document.querySelectorAll('.exercise-card');
+      const exerciseSearch = document.getElementById('exerciseSearch');
+      
+      let activeCategory = 'all';
+      let activeTags = [];
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          activeCategory = button.dataset.category;
+          
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          filterExercises();
+        });
+      });
+      
+      tagFilters.forEach(tag => {
+        tag.addEventListener('click', () => {
+          const tagValue = tag.dataset.tag;
+          
+          if (activeTags.includes(tagValue)) {
+            activeTags = activeTags.filter(t => t !== tagValue);
+            tag.classList.remove('active');
+          } else {
+            activeTags.push(tagValue);
+            tag.classList.add('active');
+          }
+          
+          filterExercises();
+        });
+      });
+      
+      exerciseSearch.addEventListener('input', filterExercises);
+      
+      function filterExercises() {
+        const searchTerm = exerciseSearch.value.toLowerCase();
+        
+        exerciseCards.forEach(card => {
+          const cardCategory = card.dataset.category;
+          const cardTags = card.dataset.tags.split(' ');
+          const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+          const cardDesc = card.querySelector('p').textContent.toLowerCase();
+          
+          // Check if card matches category filter
+          const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+          
+          // Check if card matches tag filters
+          const matchesTags = activeTags.length === 0 || activeTags.every(tag => cardTags.includes(tag));
+          
+          // Check if card matches search term
+          const matchesSearch = searchTerm === '' || 
+            cardTitle.includes(searchTerm) || 
+            cardDesc.includes(searchTerm);
+          
+          if (matchesCategory && matchesTags && matchesSearch) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+      
+      // BMI Calculator
+      const calculateBmiBtn = document.getElementById('calculate-bmi');
+      
+      calculateBmiBtn.addEventListener('click', () => {
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const heightUnit = document.getElementById('height-unit').value;
+        const weightUnit = document.getElementById('weight-unit').value;
+        
+        let heightInMeters;
+        let weightInKg;
+        
+        // Convert height to meters
+        if (heightUnit === 'cm') {
+          heightInMeters = height / 100;
+        } else {
+          // Inches to meters
+          heightInMeters = height * 0.0254;
+        }
+        
+        // Convert weight to kg
+        if (weightUnit === 'kg') {
+          weightInKg = weight;
+        } else {
+          // Pounds to kg
+          weightInKg = weight * 0.453592;
+        }
+        
+        // Calculate BMI
+        const bmi = weightInKg / (heightInMeters * heightInMeters);
+        const bmiResult = document.getElementById('bmi-result');
+        const bmiCategory = document.getElementById('bmi-category');
+        
+        // Update UI
+        bmiResult.textContent = bmi.toFixed(1);
+        
+        // Reset category classes
+        document.querySelectorAll('.category-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Set category and highlight appropriate row
+        if (bmi < 18.5) {
+          bmiCategory.textContent = 'Underweight';
+          bmiCategory.style.color = '#ff9800';
+          document.getElementById('underweight').classList.add('active');
+        } else if (bmi >= 18.5 && bmi < 25) {
+          bmiCategory.textContent = 'Normal Weight';
+          bmiCategory.style.color = '#4caf50';
+          document.getElementById('normal').classList.add('active');
+        } else if (bmi >= 25 && bmi < 30) {
+          bmiCategory.textContent = 'Overweight';
+          bmiCategory.style.color = '#ff9800';
+          document.getElementById('overweight').classList.add('active');
+        } else {
+          bmiCategory.textContent = 'Obesity';
+          bmiCategory.style.color = '#f44336';
+          document.getElementById('obese').classList.add('active');
+        }
+      });
+      
+      // Calculator Tabs
+      const calculatorTabs = document.querySelectorAll('.calculator-tab');
+      const calculatorPanes = document.querySelectorAll('.calculator-pane');
+      
+      calculatorTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabId = tab.dataset.tab;
+          
+          // Remove active class from all tabs and panes
+          calculatorTabs.forEach(t => t.classList.remove('active'));
+          calculatorPanes.forEach(p => p.classList.remove('active'));
+          
+          // Add active class to current tab and pane
+          tab.classList.add('active');
+          document.getElementById(`${tabId}-calculator`).classList.add('active');
+        });
+      });
+      
+      // Auth Modal
+      const authModal = document.getElementById('authModal');
+      const loginBtn = document.getElementById('loginBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const planSignupBtn = document.getElementById('planSignupBtn');
+      const planSignupBtn2 = document.getElementById('planSignupBtn2');
+      const planSignupBtn3 = document.getElementById('planSignupBtn3');
+      const ctaSignupBtn = document.getElementById('ctaSignupBtn');
+      const footerLoginBtn = document.getElementById('footerLoginBtn');
+      const modalTabs = document.querySelectorAll('.modal-tab');
+      const modalContents = document.querySelectorAll('.modal-content');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const successMessage = document.getElementById('success-message');
+      const successContinue = document.getElementById('success-continue');
+      
+      // Open modal with login tab
+      loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('login');
+      });
+      
+      footerLoginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('login');
+      });
+      
+      // Open modal with signup tab
+      signupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn2.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn3.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      ctaSignupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      // Close modal when clicking outside
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) {
+          closeModal();
+        }
+      });
+      
+      // Tab switching
+      modalTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabId = tab.dataset.tab;
+          
+          // Remove active class from all tabs and contents
+          modalTabs.forEach(t => t.classList.remove('active'));
+          modalContents.forEach(c => c.classList.remove('active'));
+          
+          // Add active class to current tab and content
+          tab.classList.add('active');
+          document.getElementById(`${tabId}-content`).classList.add('active');
+        });
+      });
+      
+      // Form submissions
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Normally we would send an API request here
+        // For demo purposes, just show a success message
+        showSuccessMessage('Welcome Back!', 'You have successfully logged in to your account.');
+      });
+      
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Validate passwords match
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return;
+        }
+        
+        // Normally we would send an API request here
+        // For demo purposes, just show a success message
+        showSuccessMessage('Account Created!', 'Your account has been created successfully. You can now access your personalized dashboard.');
+      });
+      
+      // Success continue button
+      successContinue.addEventListener('click', () => {
+        // Redirect to dashboard page
+        // For now, just close the modal
+        closeModal();
+        
+        // Scroll to dashboard preview
+        document.getElementById('dashboard-preview').scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      // Helper functions
+      function openModal(tab) {
+        authModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Set active tab
+        modalTabs.forEach(t => {
+          if (t.dataset.tab === tab) {
+            t.click();
+          }
+        });
+      }
+      
+      function closeModal() {
+        authModal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Hide success message
+        if (!successMessage.classList.contains('hidden')) {
+          successMessage.classList.add('hidden');
+          document.getElementById('login-content').classList.add('active');
+        }
+      }
+      
+      function showSuccessMessage(title, message) {
+        // Hide form contents
+        modalContents.forEach(content => content.classList.remove('active'));
+        
+        // Update success message
+        document.querySelector('.success-title').textContent = title;
+        document.querySelector('.success-message').textContent = message;
+        
+        // Show success message
+        successMessage.classList.remove('hidden');
+      }
+      
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          if (this.getAttribute('href') === '#') return;
+          
+          e.preventDefault();
+          
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Save exercise button
+      document.querySelectorAll('.save-exercise').forEach(button => {
+        button.addEventListener('click', function() {
+          const icon = this.querySelector('i');
+          
+          if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            this.style.color = '#3d5af1';
+          } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            this.style.color = '';
+          }
+        });
+      });
+      
+      // Load more exercises
+      document.getElementById('loadMoreExercises').addEventListener('click', function() {
+        // In a real app, this would load more exercises from the server
+        alert('In a real application, this would load more exercises from the server.');
+      });
+    });
+  </script>
+</body>
+</html>
